@@ -31,4 +31,8 @@ export class Calc {
   static calculateOppositeDegree(degree) {
     return degree - 180;
   }
+
+  static getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+  }
 }
