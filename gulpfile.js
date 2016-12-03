@@ -1,11 +1,9 @@
 const gulp = require('gulp');
-const fs = require("fs");
-const browserify = require("browserify");
+const requireDir = require('require-dir');
+const dir = requireDir('./tasks');
 
-gulp.task('build', function(done) {
-  browserify("src/js/main.js")
-    .transform("babelify", {presets: ["es2015"]})
-    .bundle()
-    .pipe(fs.createWriteStream("dist/horoscope.js"));
-  done();
+gulp.task('default', gulp.parallel('build'));
+
+gulp.task('watch', function() {
+  gulp.watch('src/horoscope/**/*', gulp.parallel('build'));
 });

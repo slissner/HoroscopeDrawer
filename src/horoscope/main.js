@@ -108,6 +108,21 @@ planets['sun'] = {
 }
 
 /**
+ * Draws a horoscope.
+ * @param selector
+ * @return Returns the snap object.
+ */
+const draw = function (selector) {
+  return Snap(selector);
+}
+
+const Horoscope = {
+  draw
+}
+
+export {Horoscope};
+
+/**
 * http://www.onlinemathe.de/forum/Kreis-Punkte-auf-der-Linie-Berechnen
 * https://upload.wikimedia.org/wikipedia/commons/8/82/Sinus_en_cosinus.png
 **/
@@ -153,7 +168,7 @@ function calculateOppositeDegree(degree) {
   return degree - 180;
 }
 
-const s = Snap("#horoscope");
+
 s.attr({ viewBox: "-50 -50 100 100" });
 
 const zodiacBoundOuter = s.circle(0, 0, radiusZodiacCircleOuter);
