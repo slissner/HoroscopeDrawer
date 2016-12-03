@@ -6,4 +6,5 @@ gulp.task('default', gulp.parallel('build'));
 
 gulp.task('watch', function() {
   gulp.watch('src/horoscope/**/*', gulp.parallel('build'));
+  gulp.watch('src/example/**/*', gulp.parallel('example-build'));
 });
