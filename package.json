@@ -1,14 +1,18 @@
 {
-  "name": "zarastro-front",
+  "name": "horoscope-drawer",
   "version": "1.0.0",
-  "description": "Front-end client application for zarastro astrology",
-  "main": "index.js",
+  "description": "A javascript library to draw horoscopes on screen.",
+  "main": "src/js/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Samuel Lissner",
   "license": "ISC",
   "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "gulp": "gulpjs/gulp#4.0",
     "mocha": "^3.2.0"
   },
   "dependencies": {

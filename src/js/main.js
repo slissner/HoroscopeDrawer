@@ -1,4 +1,4 @@
-import {s} from "../../node_modules/snapsvg/dist/snap.svg-min";
+import {Snap} from "../../node_modules/snapsvg/dist/snap.svg-min";
 
 const radiusZodiacCircleOuter = 50;
 const radiusZodiacCircleInner = 44;
