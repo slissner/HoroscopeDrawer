@@ -1,0 +1,11 @@
+{
+  "name": "zarastro-front",
+  "version": "1.0.0",
+  "description": "Front-end client application for zarastro astrology",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Samuel Lissner",
+  "license": "ISC"
+}
