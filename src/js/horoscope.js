@@ -1,3 +1,5 @@
+import {s} from "../../node_modules/snapsvg/dist/snap.svg-min";
+
 const radiusZodiacCircleOuter = 50;
 const radiusZodiacCircleInner = 44;
 const radiusZodiacCircleInnerAuxiliary = radiusZodiacCircleInner + 0.5;
