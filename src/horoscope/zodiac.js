@@ -8,7 +8,7 @@ export class Zodiac {
       stroke: "rgb(40, 40, 40)",
       radius: {
         outer: 50,
-        inner: 44,
+        inner: 43,
         get innerAuxiliary () {
           return this.inner + 0.5;
         },

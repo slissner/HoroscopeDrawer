@@ -113,8 +113,8 @@ export class Drawer {
   }
 
   drawZodiacSigns() {
-    const zodiacSignImageWidth = 2.5;
-    const zodiacSignImageHeight = 2.5;
+    const zodiacSignImageWidth = 3;
+    const zodiacSignImageHeight = 3;
 
     let signs = [];
 
@@ -146,15 +146,10 @@ export class Drawer {
         strokeWidth: 0.1
       });
 
-      const signSymbol = Calc.getPointOnCircle(-zodiac.radius.betweenOuterInner, degreeBetweenSigns)
-
-      const zodiacSignImagePositionX = signSymbol.x - zodiacSignImageWidth / 2;
-      const zodiacSignImagePositionY = signSymbol.y - zodiacSignImageHeight / 2;
+      const zodiacSignPosition = Calc.getPointOnCircle(-zodiac.radius.betweenOuterInner, degreeBetweenSigns)
+      const zodiacSignImagePositionX = zodiacSignPosition.x - zodiacSignImageWidth / 2;
+      const zodiacSignImagePositionY = zodiacSignPosition.y - zodiacSignImageHeight / 2;
       const zodiacSignSymbol = this.s.image(zodiac.signs[sign].imageUrl, zodiacSignImagePositionX, zodiacSignImagePositionY, zodiacSignImageWidth, zodiacSignImageHeight);
-      zodiacSignSymbol.attr({
-        style: "font-family: Palatino; font-size: 0.15em;",
-        textAnchor: "middle"
-      });
 
       signs.push({
         symbol: zodiacSignSymbol,
@@ -238,6 +233,8 @@ export class Drawer {
   }
 
   drawPlanet(planet, degree) {
+    const planetImageWidth = 4;
+    const planetImageHeight = 4;
 
     const point1 = Calc.getPointOnCircle(zodiac.radius.inner, degree);
     const point2 = Calc.getPointOnCircle(zodiac.radius.inner, degree, 1);
@@ -247,12 +244,22 @@ export class Drawer {
       strokeWidth: 0.2
     });
 
-    const textPoint = Calc.getPointOnCircle(zodiac.radius.inner, degree, 2);
-    const planetSymbol = this.s.text(textPoint.x, textPoint.y, planet.symbol);
-    planetSymbol.attr({
-      style: "font-family: Palatino; font-size: 0.25em;",
-      textAnchor: "middle"
+    const planetPosition = Calc.getPointOnCircle(zodiac.radius.inner, degree, 3);
+    const planetImagePositionX = planetPosition.x - planetImageWidth / 2;
+    const planetImagePositionY = planetPosition.y - planetImageHeight / 2;
+
+    let planetSymbolBackgroundRadius = null;
+    if (planetImageWidth > planetImageHeight) {
+      planetSymbolBackgroundRadius = planetImageWidth / 2;
+    } else {
+      planetSymbolBackgroundRadius = planetImageHeight / 2;
+    }
+    const planetSymbolBackground = this.s.circle(planetPosition.x, planetPosition.y, planetSymbolBackgroundRadius);
+    planetSymbolBackground.attr({
+      fill: "rgb(255, 255, 255)"
     });
+
+    const planetSymbol = this.s.image(planet.imageUrl, planetImagePositionX, planetImagePositionY, planetImageWidth, planetImageHeight);
 
     // TODO http://stackoverflow.com/questions/28128491/svg-center-text-in-circle
     // TODO http://snapsvg.io/docs/#Paper.group

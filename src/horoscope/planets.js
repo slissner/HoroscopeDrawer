@@ -1,45 +1,57 @@
 class Planets {
   constructor() {
+    const svgImagePath = "./resources/svg/planets/";
+
     return [{
       number: 1,
       name: "Sun",
-      symbol: "☉"
+      symbol: "☉",
+      imageUrl: svgImagePath + "sun.svg",
     }, {
       number: 2,
       name: "Mercury",
-      symbol: "☿"
+      symbol: "☿",
+      imageUrl: svgImagePath + "mercury.svg",
     }, {
       number: 3,
       name: "Venus",
-      symbol: "♀"
+      symbol: "♀",
+      imageUrl: svgImagePath + "venus.svg",
     }, {
       number: 4,
       name: "Mars",
-      symbol: "♂"
+      symbol: "♂",
+      imageUrl: svgImagePath + "mars.svg",
     }, {
       number: 5,
       name: "Moon",
-      symbol: "☽"
+      symbol: "☽",
+      imageUrl: svgImagePath + "moon.svg",
     }, {
       number: 6,
       name: "Jupiter",
-      symbol: "♃"
+      symbol: "♃",
+      imageUrl: svgImagePath + "jupiter.svg",
     }, {
       number: 7,
       name: "Saturn",
-      symbol: "♄"
+      symbol: "♄",
+      imageUrl: svgImagePath + "saturn.svg",
     }, {
       number: 8,
       name: "Uranus",
-      symbol: "⛢"
+      symbol: "⛢",
+      imageUrl: svgImagePath + "uranus.svg",
     }, {
       number: 9,
       name: "Neptune",
-      symbol: "♆"
+      symbol: "♆",
+      imageUrl: svgImagePath + "neptune.svg",
     }, {
       number: 10,
       name: "Pluto",
-      symbol: "♇"
+      symbol: "♇",
+      imageUrl: svgImagePath + "pluto.svg",
     }];
   }
 }
