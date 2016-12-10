@@ -1,4 +1,4 @@
-import Snap from "../../node_modules/snapsvg/dist/snap.svg-min";
+import Snap from "snapsvg/dist/snap.svg-min";
 import {Calc} from "./calc";
 import {zodiac} from "./zodiac";
 import {planets} from "./planets";
@@ -113,6 +113,9 @@ export class Drawer {
   }
 
   drawZodiacSigns() {
+    const zodiacSignImageWidth = 2.5;
+    const zodiacSignImageHeight = 2.5;
+
     let signs = [];
 
     for (let sign = 0; sign <= 11; sign++) {
@@ -144,7 +147,10 @@ export class Drawer {
       });
 
       const signSymbol = Calc.getPointOnCircle(-zodiac.radius.betweenOuterInner, degreeBetweenSigns)
-      const zodiacSignSymbol = this.s.text(signSymbol.x, signSymbol.y, zodiac.signs[sign].symbol);
+
+      const zodiacSignImagePositionX = signSymbol.x - zodiacSignImageWidth / 2;
+      const zodiacSignImagePositionY = signSymbol.y - zodiacSignImageHeight / 2;
+      const zodiacSignSymbol = this.s.image(zodiac.signs[sign].imageUrl, zodiacSignImagePositionX, zodiacSignImagePositionY, zodiacSignImageWidth, zodiacSignImageHeight);
       zodiacSignSymbol.attr({
         style: "font-family: Palatino; font-size: 0.15em;",
         textAnchor: "middle"

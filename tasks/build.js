@@ -10,13 +10,19 @@ gulp.task('clean', function () {
 });
 
 gulp.task('copy', () => {
-  return gulp.src('src/horoscope/**/*.{php,html,txt,xml,png,jpg,gif,gpg}')
+  return gulp.src('src/horoscope/**/*.{php,html,txt,xml,png,jpg,gif,gpg,svg}')
     .pipe(gulp.dest('dist/'));
 });
 
-
-gulp.task('bundle', function() {
-  return browserify("src/horoscope/main.js")
+gulp.task('bundle', function () {
+  return browserify({
+      entries: ["src/horoscope/main.js"],
+      paths: [
+        "./node_modules",
+        "./src/horoscope"
+      ],
+      standalone: 'zastro'
+    })
     .transform("babelify", {presets: ["es2015"]})
     .bundle()
     .pipe(fs.createWriteStream("dist/horoscope.js"));
