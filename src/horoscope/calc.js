@@ -1,9 +1,18 @@
 export class Calc {
+
   /**
+   * Calculates a point on a zodiac circle.
    * http://www.onlinemathe.de/forum/Kreis-Punkte-auf-der-Linie-Berechnen
    * https://upload.wikimedia.org/wikipedia/commons/8/82/Sinus_en_cosinus.png
-   **/
-  static getPointOnCircle(radius, degree, offsetFromRadius) {
+   *
+   * @param radius The radius of the circle.
+   * @param degree of the poit on the circle.
+   * @param offsetFromRadius
+   * @param traditionalDirection Calculate point starting (degree = 0) from ascendent and moving counter-clockwise. Defaults to true.
+   * If set to false, the calculation starts from descendent and moves counter-clockwise.
+   * @returns {{x: *, y: *}}
+  */
+  static getPointOnCircle(radius, degree, offsetFromRadius, traditionalDirection = true) {
     if (typeof radius === 'undefined' || typeof degree === 'undefined') {
       throw new Error("Degree and radius parameters required!");
     }
@@ -42,6 +51,11 @@ export class Calc {
     } else {
       x = xCenterPoint + radius * xNormalized;
       y = yCenterPoint + radius * yNormalized;
+    }
+
+    if (traditionalDirection) {
+      x = -x;
+      y = -y;
     }
 
     if (typeof offsetFromRadius === "undefined") {
