@@ -25,7 +25,7 @@ describe('CalcTest', function () {
       const offsetFromRadius = 0;
       const point = Calc.getPointOnCircle(radius, degree, offsetFromRadius);
       assert.strictEqual(point.x, 0, "The x-coordinate is not correct.");
-      assert.strictEqual(point.y, -100, "The y-coordinate is not correct.");
+      assert.strictEqual(point.y, 100, "The y-coordinate is not correct.");
     });
 
     it('should return expected coordinates for degree 180', function () {
@@ -35,6 +35,15 @@ describe('CalcTest', function () {
       const point = Calc.getPointOnCircle(radius, degree, offsetFromRadius);
       assert.strictEqual(point.x, -100, "The x-coordinate is not correct.");
       assert.strictEqual(point.y, 0, "The y-coordinate is not correct.");
+    });
+
+    it('should return expected coordinates for degree 270', function () {
+      const radius = 100;
+      const degree = 270;
+      const offsetFromRadius = 0;
+      const point = Calc.getPointOnCircle(radius, degree, offsetFromRadius);
+      assert.strictEqual(point.x, 0, "The x-coordinate is not correct.");
+      assert.strictEqual(point.y, -100, "The y-coordinate is not correct.");
     });
   });
 
