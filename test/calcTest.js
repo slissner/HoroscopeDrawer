@@ -76,4 +76,46 @@ describe('CalcTest', function () {
       assert.strictEqual(oppositeDegree, expectedDegree, "The opposite degree value is not correct.");
     });
   });
+
+  describe('#convertDegreeMinutesSecondsToFloat', () => {
+    it('should return input argument if no object is passed as parameter', () => {
+      const input = 280;
+      const output = Calc.convertDegreeMinutesSecondsToFloat(input);
+      assert.strictEqual(output, input, "The output is not equal input, although no-object had been passed.");
+    });
+
+    it('should throw an error if object misses `degree` property', function () {
+      const degreeObj = {};
+      assert.throws(() => {
+        Calc.convertDegreeMinutesSecondsToFloat(degreeObj);
+      }, Error);
+    });
+
+    it('should throw an error if `degree` property has non-circle values', function () {
+      const degreeObj = {
+        degree: -4
+      };
+      assert.throws(() => {
+        Calc.convertDegreeMinutesSecondsToFloat(degreeObj);
+      }, Error);
+
+      const degreeOb2j = {
+        degree: 380
+      };
+      assert.throws(() => {
+        Calc.convertDegreeMinutesSecondsToFloat(degreeObj2);
+      }, Error);
+    });
+
+    it('should calculate correctly', () => {
+      const degreeObj = {
+        degree: 100,
+        minutes: 5,
+        seconds: 10
+      };
+      const output = Calc.convertDegreeMinutesSecondsToFloat(degreeObj);
+      const expected = 100 + (5 * 1/60) + (10 * 1/60^2);
+      assert.strictEqual(output, expected, "The output is not equal input, although no-object had been passed.");
+    });
+  });
 });
