@@ -17,6 +17,9 @@ export class Calc {
       throw new Error("Degree and radius parameters required!");
     }
 
+    // Inverses the degree counting
+    // radius = -radius;
+    // degree = -degree;
     degree = this.convertDegreeMinutesSecondsToFloat(degree);
 
     const xCenterPoint = 0;

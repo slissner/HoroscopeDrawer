@@ -2,16 +2,16 @@ class Elements {
   constructor() {
     return {
       fire: {
-        fillColor: "rgba(175, 0, 0, 0.8)"
+        fillColor: "rgba(206, 0, 0, 1.0)"
       },
       wind: {
-        fillColor: "rgba(222, 207, 0, 0.82)"
+        fillColor: "rgba(255, 224, 0, 1.0)"
       },
       earth: {
-        fillColor: "rgba(125, 168, 0, 0.65)"
+        fillColor: "rgba(93, 211, 158, 1.0)"
       },
       water: {
-        fillColor: "rgba(0, 43, 153, 0.8)"
+        fillColor: "rgba(58, 162, 255, 1.0)"
       }
     };
   }

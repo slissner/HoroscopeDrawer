@@ -5,30 +5,18 @@ import {planets} from "./planets";
 import {drawer} from "./drawer";
 
 export class Horoscope {
-  constructor(planetsDegrees) {
+  constructor(properties) {
     this._elements = elements;
     this._zodiac = zodiac;
     this._planets = planets;
     this._drawer = drawer;
 
-    if (planetsDegrees) {
-      this._planetsDegrees = planetsDegrees;
+    if (properties) {
+      this._properties = properties;
     } else {
-      this._planetsDegrees = {
-        sun: Calc.getRandomArbitrary(0, 360),
-        mercury: Calc.getRandomArbitrary(0, 360),
-        venus: Calc.getRandomArbitrary(0, 360),
-        mars: Calc.getRandomArbitrary(0, 360),
-        moon: Calc.getRandomArbitrary(0, 360),
-        jupiter: Calc.getRandomArbitrary(0, 360),
-        saturn: Calc.getRandomArbitrary(0, 360),
-        uranus: Calc.getRandomArbitrary(0, 360),
-        neptune: Calc.getRandomArbitrary(0, 360),
-        pluto: Calc.getRandomArbitrary(0, 360),
-        mars: Calc.getRandomArbitrary(0, 360),
-      }
+      this.setDefaultProperties();
     }
-  };
+  }
 
   get elements() {
     return this._elements;
@@ -54,12 +42,71 @@ export class Horoscope {
     this._planets = value;
   }
 
+  setDefaultProperties() {
+    this._properties = {};
+    this._properties.planets = {};
+    this._properties.planets.sun = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+    this._properties.planets.mercury = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+    this._properties.planets.venus = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+    this._properties.planets.mars = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+    this._properties.planets.moon = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+    this._properties.planets.jupiter = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+    this._properties.planets.saturn = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+    this._properties.planets.uranus = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+    this._properties.planets.neptune = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+    this._properties.planets.pluto = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+    this._properties.planets.mars = {
+      degree: Calc.getRandomArbitrary(0, 360)
+    };
+
+    this._properties.houses = {};
+    this._properties.houses.house1 = {
+      degree: -0
+    };
+    this._properties.houses.house2 = {
+      degree: Calc.getRandomArbitrary(-25, -40)
+    };
+    this._properties.houses.house3 = {
+      degree: Calc.getRandomArbitrary(-50, -60)
+    };
+    this._properties.houses.house4 = {
+      degree: Calc.getRandomArbitrary(-75, -85)
+    };
+    this._properties.houses.house5 = {
+      degree: Calc.getRandomArbitrary(-110, -120)
+    };
+    this._properties.houses.house6 = {
+      degree: Calc.getRandomArbitrary(-150, -160)
+    };
+  }
+
   /**
    * Draws a horoscope.
    * @param selector
-   * @return Returns the snap object.
+   * @return Returns an object with snap objects.
    */
   draw(selector) {
-    return this._drawer.draw(selector, this._planetsDegrees);
+    this._properties.selector = selector;
+    return this._drawer.draw(this._properties);
   }
 }
