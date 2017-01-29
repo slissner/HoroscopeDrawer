@@ -46,7 +46,7 @@ export class Horoscope {
     this._properties = {};
     this._properties.planets = {};
     this._properties.planets.sun = {
-      degree: Calc.getRandomArbitrary(0, 360)
+      degree: 30
     };
     this._properties.planets.mercury = {
       degree: Calc.getRandomArbitrary(0, 360)
@@ -84,19 +84,19 @@ export class Horoscope {
       degree: -0
     };
     this._properties.houses.house2 = {
-      degree: Calc.getRandomArbitrary(-25, -40)
+      degree: Calc.getRandomArbitrary(25, 40)
     };
     this._properties.houses.house3 = {
-      degree: Calc.getRandomArbitrary(-50, -60)
+      degree: Calc.getRandomArbitrary(50, 60)
     };
     this._properties.houses.house4 = {
-      degree: Calc.getRandomArbitrary(-75, -85)
+      degree: Calc.getRandomArbitrary(75, 85)
     };
     this._properties.houses.house5 = {
-      degree: Calc.getRandomArbitrary(-110, -120)
+      degree: Calc.getRandomArbitrary(110, 120)
     };
     this._properties.houses.house6 = {
-      degree: Calc.getRandomArbitrary(-150, -160)
+      degree: Calc.getRandomArbitrary(150, 160)
     };
     this._properties.houses.house7 = {
       degree: Calc.getOppositeDegree(this._properties.houses.house1.degree)

@@ -120,9 +120,9 @@ export class Drawer {
     let signs = [];
 
     for (let sign = 0; sign <= 11; sign++) {
-      let degree = sign * -30;
-      let degreeBetweenSigns = degree - 15;
-      let degreeNextSign = degree - 30;
+      let degree = sign * 30;
+      let degreeBetweenSigns = degree + 15;
+      let degreeNextSign = degree + 30;
 
       const topLeftPoint = Calc.getPointOnCircle(zodiac.radius.outer, degree);
       const topRightPoint = Calc.getPointOnCircle(zodiac.radius.innerAuxiliary, degree);
@@ -167,8 +167,8 @@ export class Drawer {
 
     // 1 + 7
     const ascendantDegree = (this.houses.hasOwnProperty('house1') && this.houses.house1.hasOwnProperty('degree')) ? this.houses.house1.degree : null;
-    const ascendantPoint = Calc.getPointOnCircle(-zodiac.radius.outer, ascendantDegree, 2);
-    const descendantPoint = Calc.getPointOnCircle(-zodiac.radius.outer, Calc.getOppositeDegree(ascendantDegree), 2);
+    const ascendantPoint = Calc.getPointOnCircle(zodiac.radius.outer, ascendantDegree, -2);
+    const descendantPoint = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(ascendantDegree), -2);
     const ascendantDescendantAxis = this.s.line(ascendantPoint.x, ascendantPoint.y, descendantPoint.x, descendantPoint.y);
     ascendantDescendantAxis.attr({
       stroke: zodiac.stroke,
@@ -178,8 +178,8 @@ export class Drawer {
 
     // 2 + 8
     const house2Degree = (this.houses.hasOwnProperty('house2') && this.houses.house2.hasOwnProperty('degree')) ? this.houses.house2.degree : null;
-    const house2Point = Calc.getPointOnCircle(-zodiac.radius.outer, house2Degree, 2);
-    const house8Point = Calc.getPointOnCircle(-zodiac.radius.outer, Calc.getOppositeDegree(house2Degree), 2);
+    const house2Point = Calc.getPointOnCircle(zodiac.radius.outer, house2Degree, -2);
+    const house8Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house2Degree), -2);
     const house2house8Axis = this.s.line(house2Point.x, house2Point.y, house8Point.x, house8Point.y);
     house2house8Axis.attr({
       stroke: zodiac.stroke,
@@ -189,8 +189,8 @@ export class Drawer {
 
     // 3 + 9
     const house3Degree = (this.houses.hasOwnProperty('house3') && this.houses.house3.hasOwnProperty('degree')) ? this.houses.house3.degree : null;
-    const house3Point = Calc.getPointOnCircle(-zodiac.radius.outer, house3Degree, 2);
-    const house9Point = Calc.getPointOnCircle(-zodiac.radius.outer, Calc.getOppositeDegree(house3Degree), 2);
+    const house3Point = Calc.getPointOnCircle(zodiac.radius.outer, house3Degree, -2);
+    const house9Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house3Degree), -2);
     const house3house9Axis = this.s.line(house3Point.x, house3Point.y, house9Point.x, house9Point.y);
     house3house9Axis.attr({
       stroke: zodiac.stroke,
@@ -200,8 +200,8 @@ export class Drawer {
 
     // 4 + 10
     const immumCoelliDegree = (this.houses.hasOwnProperty('house4') && this.houses.house4.hasOwnProperty('degree')) ? this.houses.house4.degree : null;
-    const immumCoelliPoint = Calc.getPointOnCircle(-zodiac.radius.outer, immumCoelliDegree, 2);
-    const mediumCoelliPoint = Calc.getPointOnCircle(-zodiac.radius.outer, Calc.getOppositeDegree(immumCoelliDegree), 2);
+    const immumCoelliPoint = Calc.getPointOnCircle(zodiac.radius.outer, immumCoelliDegree, -2);
+    const mediumCoelliPoint = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(immumCoelliDegree), -2);
     const immumMediumCoelliAxis = this.s.line(immumCoelliPoint.x, immumCoelliPoint.y, mediumCoelliPoint.x, mediumCoelliPoint.y);
     immumMediumCoelliAxis.attr({
       stroke: zodiac.stroke,
@@ -211,8 +211,8 @@ export class Drawer {
 
     // 5 + 11
     const house5Degree = (this.houses.hasOwnProperty('house5') && this.houses.house5.hasOwnProperty('degree')) ? this.houses.house5.degree : null;
-    const house5Point = Calc.getPointOnCircle(-zodiac.radius.outer, house5Degree, 2);
-    const house11Point = Calc.getPointOnCircle(-zodiac.radius.outer, Calc.getOppositeDegree(house5Degree), 2);
+    const house5Point = Calc.getPointOnCircle(zodiac.radius.outer, house5Degree, -2);
+    const house11Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house5Degree), -2);
     const house5house11Axis = this.s.line(house5Point.x, house5Point.y, house11Point.x, house11Point.y);
     house5house11Axis.attr({
       stroke: zodiac.stroke,
@@ -222,8 +222,8 @@ export class Drawer {
 
     // 6 + 12
     const house6Degree = (this.houses.hasOwnProperty('house6') && this.houses.house6.hasOwnProperty('degree')) ? this.houses.house6.degree : null;
-    const house6Point = Calc.getPointOnCircle(-zodiac.radius.outer, house6Degree, 2);
-    const house12Point = Calc.getPointOnCircle(-zodiac.radius.outer, Calc.getOppositeDegree(house6Degree), 2);
+    const house6Point = Calc.getPointOnCircle(zodiac.radius.outer, house6Degree, -2);
+    const house12Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house6Degree), -2);
     const house6house12Axis = this.s.line(house6Point.x, house6Point.y, house12Point.x, house12Point.y);
     house6house12Axis.attr({
       stroke: zodiac.stroke,
@@ -238,9 +238,9 @@ export class Drawer {
     const planetImageWidth = 4;
     const planetImageHeight = 4;
 
-    const point1 = Calc.getPointOnCircle(zodiac.radius.inner, degree);
-    const point2 = Calc.getPointOnCircle(zodiac.radius.inner, degree, 1);
-    const planetAuxiliaryLine = this.s.line(point1.x, point1.y, point2.x, point2.y);
+    const linePoint1 = Calc.getPointOnCircle(zodiac.radius.inner, degree);
+    const linePoint2 = Calc.getPointOnCircle(zodiac.radius.inner, degree, 1);
+    const planetAuxiliaryLine = this.s.line(linePoint1.x, linePoint1.y, linePoint2.x, linePoint2.y);
     planetAuxiliaryLine.attr({
       stroke: zodiac.stroke,
       strokeWidth: 0.2
@@ -263,63 +263,22 @@ export class Drawer {
 
     const planetSymbol = this.s.image(planet.imageUrl, planetImagePositionX, planetImagePositionY, planetImageWidth, planetImageHeight);
 
+    const meta = {};
+    Object.assign(meta, planet);
+    meta['degree'] = degree;
+    meta['position'] = planetPosition;
+
     return {
       planet: planetSymbol,
       background: planetSymbolBackground,
-      meta: {
-        planet,
-        degree,
-        position: planetPosition
-      }
+      meta
     };
   }
 
-  drawPluto() {
+  drawSun() {
     return this.drawPlanet(planets.find((elem) => {
-      return elem.name == "Pluto";
-    }), this.planets.pluto.degree);
-  }
-
-  drawNeptune() {
-    return this.drawPlanet(planets.find((elem) => {
-      return elem.name == "Neptune";
-    }), this.planets.neptune.degree);
-  }
-
-  drawUranus() {
-    return this.drawPlanet(planets.find((elem) => {
-      return elem.name == "Uranus";
-    }), this.planets.uranus.degree);
-  }
-
-  drawSaturn() {
-    return this.drawPlanet(planets.find((elem) => {
-      return elem.name == "Saturn";
-    }), this.planets.saturn.degree);
-  }
-
-  drawJupiter() {
-    return this.drawPlanet(planets.find((elem) => {
-      return elem.name == "Jupiter";
-    }), this.planets.jupiter.degree);
-  }
-
-  drawMoon() {
-    return this.drawPlanet(planets.find((elem) => {
-      return elem.name == "Moon";
-    }), this.planets.moon.degree);
-  }
-
-  drawMars() {
-    return this.drawPlanet(planets.find((elem) => {
-      return elem.name == "Mars";
-    }), this.planets.mars.degree);
-  }
-
-  drawVenus() {
-    return this.drawPlanet(planets.find((elem) => {
-      return elem.name == "Venus";
-    }), this.planets.venus.degree);
+      return elem.name == "Sun";
+    }), this.planets.sun.degree);
   }
 
   drawMercury() {
@@ -328,10 +287,52 @@ export class Drawer {
     }), this.planets.mercury.degree);
   }
 
-  drawSun() {
+  drawVenus() {
     return this.drawPlanet(planets.find((elem) => {
-      return elem.name == "Sun";
-    }), this.planets.sun.degree);
+      return elem.name == "Venus";
+    }), this.planets.venus.degree);
+  }
+
+  drawMars() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Mars";
+    }), this.planets.mars.degree);
+  }
+
+  drawMoon() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Moon";
+    }), this.planets.moon.degree);
+  }
+
+  drawJupiter() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Jupiter";
+    }), this.planets.jupiter.degree);
+  }
+
+  drawSaturn() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Saturn";
+    }), this.planets.saturn.degree);
+  }
+
+  drawUranus() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Uranus";
+    }), this.planets.uranus.degree);
+  }
+
+  drawNeptune() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Neptune";
+    }), this.planets.neptune.degree);
+  }
+
+  drawPluto() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Pluto";
+    }), this.planets.pluto.degree);
   }
 
   correctCollidingPlanets(planets) {

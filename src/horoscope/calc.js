@@ -17,21 +17,21 @@ export class Calc {
       throw new Error("Degree and radius parameters required!");
     }
 
-    // Inverses the degree counting
-    // radius = -radius;
-    // degree = -degree;
     degree = this.convertDegreeMinutesSecondsToFloat(degree);
 
     const xCenterPoint = 0;
     const yCenterPoint = 0;
     const degreeNormalized = degree * (Math.PI / 180.0);
 
-    // fizes JS bug of Math.sin(Math.PI) not being 0. See http://stackoverflow.com/q/6223616/3757139
+    // Fixes JS bug of Math.sin(Math.PI) (or Math.cos(Math.PI)) not returning correct values on 0, 90, 180, 270, 360
+    // degrees. See http://stackoverflow.com/q/6223616/3757139
     let xNormalized = null;
     if (this.isEachDegree(90, degree) && !this.isEachDegree(180, degree)) {
       xNormalized = 0;
-    } else if (this.isEachDegree(180, degree)) {
+    } else if (this.isEachDegree(180, degree) && !this.isEachDegree(360, degree)) {
       xNormalized = -1;
+    } else if (this.isEachDegree(360, degree)) {
+      xNormalized = 1;
     } else {
       xNormalized = Math.cos(degreeNormalized);
     }
@@ -39,7 +39,7 @@ export class Calc {
     let yNormalized = null;
     if (this.isEachDegree(90, degree) && !this.isEachDegree(180, degree) && !this.isEachDegree(270, degree)) {
       yNormalized = 1;
-    } else if (this.isEachDegree(180, degree)) {
+    } else if (this.isEachDegree(180, degree) && !this.isEachDegree(270)) {
       yNormalized = 0;
     } else if (this.isEachDegree(270, degree)) {
       yNormalized = -1;
@@ -49,6 +49,7 @@ export class Calc {
 
     let x = null;
     let y = null;
+    const ySvgInverse = true;
 
     if (offsetFromRadius) {
       x = xCenterPoint + (radius - offsetFromRadius) * xNormalized;
@@ -56,6 +57,10 @@ export class Calc {
     } else {
       x = xCenterPoint + radius * xNormalized;
       y = yCenterPoint + radius * yNormalized;
+    }
+
+    if (ySvgInverse) {
+      y = -y;
     }
 
     if (traditionalDirection) {
