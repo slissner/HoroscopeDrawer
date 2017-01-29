@@ -120,8 +120,11 @@ export class Drawer {
     let signs = [];
 
     for (let sign = 0; sign <= 11; sign++) {
+      const signMeta = zodiac.signs[sign];
+
       let degree = sign * 30;
       let degreeBetweenSigns = degree + 15;
+      let degreePreviousSign = degree - 30;
       let degreeNextSign = degree + 30;
 
       const topLeftPoint = Calc.getPointOnCircle(zodiac.radius.outer, degree);
@@ -142,7 +145,7 @@ export class Drawer {
       ].join(" "));
 
       zodiacSignBackground.attr({
-        fill: zodiac.signs[sign].fillColor(),
+        fill: signMeta.fillColor(),
         stroke: zodiac.stroke,
         strokeWidth: 0.1
       });
@@ -150,10 +153,19 @@ export class Drawer {
       const zodiacSignPosition = Calc.getPointOnCircle(zodiac.radius.betweenOuterInner, degreeBetweenSigns)
       const zodiacSignImagePositionX = zodiacSignPosition.x - zodiacSignImageWidth / 2;
       const zodiacSignImagePositionY = zodiacSignPosition.y - zodiacSignImageHeight / 2;
-      const zodiacSignSymbol = this.s.image(zodiac.signs[sign].imageUrl, zodiacSignImagePositionX, zodiacSignImagePositionY, zodiacSignImageWidth, zodiacSignImageHeight);
+      const zodiacSignSymbol = this.s.image(signMeta.imageUrl, zodiacSignImagePositionX, zodiacSignImagePositionY, zodiacSignImageWidth, zodiacSignImageHeight);
+
+      let meta = {};
+      Object.assign(meta, signMeta);
+      meta['degree'] = {
+        self: degree,
+        nextSign: degreeNextSign,
+        previousSign: degreePreviousSign
+      };
+      meta['position'] = zodiacSignPosition;
 
       signs.push({
-        meta: zodiac.signs[sign],
+        meta,
         symbol: zodiacSignSymbol,
         background: zodiacSignBackground
       });
@@ -263,7 +275,7 @@ export class Drawer {
 
     const planetSymbol = this.s.image(planet.imageUrl, planetImagePositionX, planetImagePositionY, planetImageWidth, planetImageHeight);
 
-    const meta = {};
+    let meta = {};
     Object.assign(meta, planet);
     meta['degree'] = degree;
     meta['position'] = planetPosition;
