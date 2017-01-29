@@ -1,7 +1,8 @@
-const gulp = require('gulp');
+const gulp = require("gulp");
 const fs = require("fs");
-const del = require('del');
+const del = require("del");
 const browserify = require("browserify");
+const exorcist = require("exorcist");
 
 gulp.task('clean', function () {
   return del([
@@ -21,13 +22,15 @@ gulp.task('bundle', function () {
         "./node_modules",
         "./src/horoscope"
       ],
-      standalone: 'zastro'
+      standalone: 'zastro',
+      debug: true
     })
     .transform("babelify", {presets: ["es2015"]})
     .bundle()
-    .pipe(fs.createWriteStream("dist/horoscope.js"));
+    .pipe(exorcist('dist/horoscope-drawer.js.map', null, '../'))
+    .pipe(fs.createWriteStream("dist/horoscope-drawer.js"));
 });
 
 gulp.task('build',
-  gulp.series('clean', gulp.parallel('bundle', 'copy'))
+  gulp.series('clean', 'bundle', 'copy')
 );
