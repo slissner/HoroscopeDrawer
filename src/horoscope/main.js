@@ -98,6 +98,24 @@ export class Horoscope {
     this._properties.houses.house6 = {
       degree: Calc.getRandomArbitrary(-150, -160)
     };
+    this._properties.houses.house7 = {
+      degree: Calc.getOppositeDegree(this._properties.houses.house1.degree)
+    };
+    this._properties.houses.house8 = {
+      degree: Calc.getOppositeDegree(this._properties.houses.house2.degree)
+    };
+    this._properties.houses.house9 = {
+      degree: Calc.getOppositeDegree(this._properties.houses.house3.degree)
+    };
+    this._properties.houses.house10 = {
+      degree: Calc.getOppositeDegree(this._properties.houses.house4.degree)
+    };
+    this._properties.houses.house11 = {
+      degree: Calc.getOppositeDegree(this._properties.houses.house5.degree)
+    };
+    this._properties.houses.house12 = {
+      degree: Calc.getOppositeDegree(this._properties.houses.house6.degree)
+    };
   }
 
   /**

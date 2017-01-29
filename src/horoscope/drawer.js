@@ -22,60 +22,20 @@ export class Drawer {
       degrees: this.drawZodiacDegrees(),
       signs: this.drawZodiacSigns(),
       houses: {
-        axis: this.drawHousesAxis()
+        axes: this.drawHousesAxes(),
+        meta: this.houses
       },
       planets: [
-        {
-          name: "sun",
-          drawing: this.drawPlanet(planets.find((elem) => {
-            return elem.name == "Sun";
-          }), this.planets.sun.degree)
-        }, {
-          name: "mercury",
-          drawing: this.drawPlanet(planets.find((elem) => {
-            return elem.name == "Mercury";
-          }), this.planets.mercury.degree)
-        }, {
-          name: "venus",
-          drawing: this.drawPlanet(planets.find((elem) => {
-            return elem.name == "Venus";
-          }), this.planets.venus.degree)
-        }, {
-          name: "mars",
-          drawing: this.drawPlanet(planets.find((elem) => {
-            return elem.name == "Mars";
-          }), this.planets.mars.degree)
-        }, {
-          name: "moon",
-          drawing: this.drawPlanet(planets.find((elem) => {
-            return elem.name == "Moon";
-          }), this.planets.moon.degree)
-        }, {
-          name: "jupiter",
-          drawing: this.drawPlanet(planets.find((elem) => {
-            return elem.name == "Jupiter";
-          }), this.planets.jupiter.degree)
-        }, {
-          name: "saturn",
-          drawing: this.drawPlanet(planets.find((elem) => {
-            return elem.name == "Saturn";
-          }), this.planets.saturn.degree)
-        }, {
-          name: "uranus",
-          drawing: this.drawPlanet(planets.find((elem) => {
-            return elem.name == "Uranus";
-          }), this.planets.uranus.degree)
-        }, {
-          name: "neptune",
-          drawing: this.drawPlanet(planets.find((elem) => {
-            return elem.name == "Neptune";
-          }), this.planets.neptune.degree)
-        }, {
-          name: "pluto",
-          drawing: this.drawPlanet(planets.find((elem) => {
-            return elem.name == "Pluto";
-          }), this.planets.pluto.degree)
-        }
+        this.drawSun(),
+        this.drawMercury(),
+        this.drawVenus(),
+        this.drawMars(),
+        this.drawMoon(),
+        this.drawJupiter(),
+        this.drawSaturn(),
+        this.drawUranus(),
+        this.drawNeptune(),
+        this.drawPluto()
       ]
     };
 
@@ -140,7 +100,14 @@ export class Drawer {
         strokeWidth: 0.1
       });
 
-      degrees.push(zodiacDegree);
+      degrees.push({
+        meta: {
+          degree,
+          point1,
+          point2
+        },
+        zodiacDegree
+      });
     }
 
     return degrees;
@@ -157,11 +124,11 @@ export class Drawer {
       let degreeBetweenSigns = degree - 15;
       let degreeNextSign = degree - 30;
 
-      const topLeftPoint = Calc.getPointOnCircle(-zodiac.radius.outer, degree);
-      const topRightPoint = Calc.getPointOnCircle(-zodiac.radius.innerAuxiliary, degree);
-      const rightArcDescription = this.describeArc(-zodiac.radius.innerAuxiliary, degreeNextSign, degree);
-      const bottomLeftPoint = Calc.getPointOnCircle(-zodiac.radius.outer, degreeNextSign);
-      const leftArcDescription = this.describeArc(-zodiac.radius.outer, degreeNextSign, degree);
+      const topLeftPoint = Calc.getPointOnCircle(zodiac.radius.outer, degree);
+      const topRightPoint = Calc.getPointOnCircle(zodiac.radius.innerAuxiliary, degree);
+      const rightArcDescription = this.describeArc(zodiac.radius.innerAuxiliary, degreeNextSign, degree);
+      const bottomLeftPoint = Calc.getPointOnCircle(zodiac.radius.outer, degreeNextSign);
+      const leftArcDescription = this.describeArc(zodiac.radius.outer, degreeNextSign, degree);
 
       const zodiacSignBackground = this.s.path([
         "M", topLeftPoint.x, topLeftPoint.y,
@@ -180,12 +147,13 @@ export class Drawer {
         strokeWidth: 0.1
       });
 
-      const zodiacSignPosition = Calc.getPointOnCircle(-zodiac.radius.betweenOuterInner, degreeBetweenSigns)
+      const zodiacSignPosition = Calc.getPointOnCircle(zodiac.radius.betweenOuterInner, degreeBetweenSigns)
       const zodiacSignImagePositionX = zodiacSignPosition.x - zodiacSignImageWidth / 2;
       const zodiacSignImagePositionY = zodiacSignPosition.y - zodiacSignImageHeight / 2;
       const zodiacSignSymbol = this.s.image(zodiac.signs[sign].imageUrl, zodiacSignImagePositionX, zodiacSignImagePositionY, zodiacSignImageWidth, zodiacSignImageHeight);
 
       signs.push({
+        meta: zodiac.signs[sign],
         symbol: zodiacSignSymbol,
         background: zodiacSignBackground
       });
@@ -194,7 +162,7 @@ export class Drawer {
     return signs;
   }
 
-  drawHousesAxis() {
+  drawHousesAxes() {
     let axis = [];
 
     // 1 + 7
@@ -298,8 +266,72 @@ export class Drawer {
     return {
       planet: planetSymbol,
       background: planetSymbolBackground,
-      position: planetPosition
+      meta: {
+        planet,
+        degree,
+        position: planetPosition
+      }
     };
+  }
+
+  drawPluto() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Pluto";
+    }), this.planets.pluto.degree);
+  }
+
+  drawNeptune() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Neptune";
+    }), this.planets.neptune.degree);
+  }
+
+  drawUranus() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Uranus";
+    }), this.planets.uranus.degree);
+  }
+
+  drawSaturn() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Saturn";
+    }), this.planets.saturn.degree);
+  }
+
+  drawJupiter() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Jupiter";
+    }), this.planets.jupiter.degree);
+  }
+
+  drawMoon() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Moon";
+    }), this.planets.moon.degree);
+  }
+
+  drawMars() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Mars";
+    }), this.planets.mars.degree);
+  }
+
+  drawVenus() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Venus";
+    }), this.planets.venus.degree);
+  }
+
+  drawMercury() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Mercury";
+    }), this.planets.mercury.degree);
+  }
+
+  drawSun() {
+    return this.drawPlanet(planets.find((elem) => {
+      return elem.name == "Sun";
+    }), this.planets.sun.degree);
   }
 
   correctCollidingPlanets(planets) {
