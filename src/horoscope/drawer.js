@@ -17,10 +17,16 @@ export class Drawer {
     this.s = Snap(this.selector);
     this.s.attr({viewBox: "-50 -50 100 100"});
 
-    let drawn = {
+    this.drawn = {
       circles: this.drawZodiacCircles(),
       degrees: this.drawZodiacDegrees(),
-      signs: this.drawZodiacSigns(),
+      zodiac: {
+        signs: this.drawZodiacSigns(properties.zodiac.start.sign, properties.zodiac.start.degree),
+        ascendant: {
+          signIndex: properties.zodiac.start.sign,
+          correctedByDegrees: properties.zodiac.start.degree,
+        }
+      },
       houses: {
         axes: this.drawHousesAxes(),
         meta: this.houses
@@ -41,16 +47,16 @@ export class Drawer {
 
     // drawn.planets = this.correctCollidingPlanets(drawn.planets);
 
-    return drawn;
+    return this.drawn;
   }
 
   describeArc(radius, startDegree, endDegree) {
 
-    let start = Calc.getPointOnCircle(radius, endDegree);
-    let end = Calc.getPointOnCircle(radius, startDegree);
-    let largeArcFlag = endDegree - startDegree <= 180 ? "0" : "1";
+    const start = Calc.getPointOnCircle(radius, endDegree);
+    const end = Calc.getPointOnCircle(radius, startDegree);
+    const largeArcFlag = endDegree - startDegree <= 180 ? "0" : "1";
 
-    let d = [
+    const d = [
       "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
     ].join(" ");
 
@@ -58,7 +64,7 @@ export class Drawer {
   }
 
   drawZodiacCircles() {
-    let circles = {
+    const circles = {
       outer: this.s.circle(0, 0, zodiac.radius.outer),
       inner: this.s.circle(0, 0, zodiac.radius.inner),
       innerAuxiliary: this.s.circle(0, 0, zodiac.radius.innerAuxiliary)
@@ -84,7 +90,7 @@ export class Drawer {
   }
 
   drawZodiacDegrees() {
-    let degrees = [];
+    const degrees = [];
 
     for (let degree = 0; degree <= 360; degree++) {
       const radius = zodiac.radius.innerAuxiliary;
@@ -113,19 +119,30 @@ export class Drawer {
     return degrees;
   }
 
-  drawZodiacSigns() {
+  drawZodiacSigns(startSign, signDegree) {
     const zodiacSignImageWidth = 3;
     const zodiacSignImageHeight = 3;
 
-    let signs = [];
+    const signs = [];
+
+    const ascendantDegreeCorrection = zodiac.validateSignDegree(signDegree);
+    const startSignIndex = zodiac.getStartSignIndex(startSign);
 
     for (let sign = 0; sign <= 11; sign++) {
-      const signMeta = zodiac.signs[sign];
+      let signIndex = null;
+      const regularIndex = startSignIndex + sign;
+      const isIndexOutOfBound = (regularIndex > 11);
+      if (isIndexOutOfBound) {
+        signIndex = regularIndex - 12;
+      } else {
+        signIndex = regularIndex;
+      }
+      const signObj = zodiac.signs[signIndex];
 
-      let degree = sign * 30;
-      let degreeBetweenSigns = degree + 15;
-      let degreePreviousSign = degree - 30;
-      let degreeNextSign = degree + 30;
+      const degree = sign * 30 - ascendantDegreeCorrection;
+      const degreeBetweenSigns = degree + 15;
+      const degreePreviousSign = degree - 30;
+      const degreeNextSign = degree + 30;
 
       const topLeftPoint = Calc.getPointOnCircle(zodiac.radius.outer, degree);
       const topRightPoint = Calc.getPointOnCircle(zodiac.radius.innerAuxiliary, degree);
@@ -145,7 +162,7 @@ export class Drawer {
       ].join(" "));
 
       zodiacSignBackground.attr({
-        fill: signMeta.fillColor(),
+        fill: signObj.fillColor(),
         stroke: zodiac.stroke,
         strokeWidth: 0.1
       });
@@ -153,10 +170,10 @@ export class Drawer {
       const zodiacSignPosition = Calc.getPointOnCircle(zodiac.radius.betweenOuterInner, degreeBetweenSigns)
       const zodiacSignImagePositionX = zodiacSignPosition.x - zodiacSignImageWidth / 2;
       const zodiacSignImagePositionY = zodiacSignPosition.y - zodiacSignImageHeight / 2;
-      const zodiacSignSymbol = this.s.image(signMeta.imageUrl, zodiacSignImagePositionX, zodiacSignImagePositionY, zodiacSignImageWidth, zodiacSignImageHeight);
+      const zodiacSignSymbol = this.s.image(signObj.imageUrl, zodiacSignImagePositionX, zodiacSignImagePositionY, zodiacSignImageWidth, zodiacSignImageHeight);
 
-      let meta = {};
-      Object.assign(meta, signMeta);
+      const meta = {};
+      Object.assign(meta, signObj);
       meta['degree'] = {
         self: degree,
         nextSign: degreeNextSign,
@@ -170,12 +187,11 @@ export class Drawer {
         background: zodiacSignBackground
       });
     }
-
     return signs;
   }
 
   drawHousesAxes() {
-    let axis = [];
+    const axis = [];
 
     // 1 + 7
     const ascendantDegree = (this.houses.hasOwnProperty('house1') && this.houses.house1.hasOwnProperty('degree')) ? this.houses.house1.degree : null;
@@ -275,7 +291,7 @@ export class Drawer {
 
     const planetSymbol = this.s.image(planet.imageUrl, planetImagePositionX, planetImagePositionY, planetImageWidth, planetImageHeight);
 
-    let meta = {};
+    const meta = {};
     Object.assign(meta, planet);
     meta['degree'] = degree;
     meta['position'] = planetPosition;

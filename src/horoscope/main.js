@@ -44,9 +44,14 @@ export class Horoscope {
 
   setDefaultProperties() {
     this._properties = {};
+    this._properties.zodiac = {};
+    this._properties.zodiac.start = {
+      sign: Calc.getRandomInt(0, 11),
+      degree: Calc.getRandomArbitrary(0, 30)
+    }
     this._properties.planets = {};
     this._properties.planets.sun = {
-      degree: 30
+      degree: Calc.getRandomArbitrary(0, 360)
     };
     this._properties.planets.mercury = {
       degree: Calc.getRandomArbitrary(0, 360)
