@@ -69,22 +69,10 @@ export class Drawer {
       inner: this.s.circle(0, 0, zodiac.radius.inner),
       innerAuxiliary: this.s.circle(0, 0, zodiac.radius.innerAuxiliary)
     }
-
-    circles.outer.attr({
-      fill: "rgba(250, 250, 250, 0.15)",
-      stroke: zodiac.stroke,
-      strokeWidth: 0.2
-    });
-    circles.inner.attr({
-      fill: "rgba(255, 255, 255, 0)",
-      stroke: zodiac.stroke,
-      strokeWidth: 0.2
-    });
-    circles.innerAuxiliary.attr({
-      fill: "rgba(255, 255, 255, 0)",
-      stroke: zodiac.stroke,
-      strokeWidth: 0.1
-    });
+    
+    circles.outer.addClass("zodiac-circle-outer");
+    circles.inner.addClass("zodiac-circle-inner");
+    circles.innerAuxiliary.addClass("zodiac-circle-inner-auxiliary");
 
     return circles;
   }
@@ -92,7 +80,7 @@ export class Drawer {
   drawZodiacDegrees() {
     const degrees = [];
 
-    for (let degree = 0; degree <= 360; degree++) {
+    for (let degree = 0; degree < 360; degree++) {
       const radius = zodiac.radius.innerAuxiliary;
       const offsetFromRadius = 1;
 
@@ -101,10 +89,10 @@ export class Drawer {
 
       const zodiacDegree = this.s.line(point1.x, point1.y, point2.x, point2.y);
       zodiacDegree.attr({
-        index: degree,
-        stroke: zodiac.stroke,
-        strokeWidth: 0.1
+        index: degree
       });
+      zodiacDegree.addClass("zodiac-degree");
+      zodiacDegree.addClass("zodiac-degree-" + degree);
 
       degrees.push({
         meta: {
@@ -161,11 +149,11 @@ export class Drawer {
         "Z"
       ].join(" "));
 
-      zodiacSignBackground.attr({
-        fill: signObj.fillColor(),
-        stroke: zodiac.stroke,
-        strokeWidth: 0.1
-      });
+      const signElementClass = "zodiac-sign-element-" + signObj.element;
+      const signNameClass = "zodiac-sign-" + signObj.name.toLowerCase();
+      zodiacSignBackground.addClass("zodiac-sign");
+      zodiacSignBackground.addClass(signElementClass);
+      zodiacSignBackground.addClass(signNameClass);
 
       const zodiacSignPosition = Calc.getPointOnCircle(zodiac.radius.betweenOuterInner, degreeBetweenSigns)
       const zodiacSignImagePositionX = zodiacSignPosition.x - zodiacSignImageWidth / 2;
@@ -198,10 +186,8 @@ export class Drawer {
     const ascendantPoint = Calc.getPointOnCircle(zodiac.radius.outer, ascendantDegree, -2);
     const descendantPoint = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(ascendantDegree), -2);
     const ascendantDescendantAxis = this.s.line(ascendantPoint.x, ascendantPoint.y, descendantPoint.x, descendantPoint.y);
-    ascendantDescendantAxis.attr({
-      stroke: zodiac.stroke,
-      strokeWidth: 0.5
-    });
+    ascendantDescendantAxis.addClass("house-axis");
+    ascendantDescendantAxis.addClass("house-axis-ascendant-descendant");
     axis.push(ascendantDescendantAxis);
 
     // 2 + 8
@@ -209,10 +195,8 @@ export class Drawer {
     const house2Point = Calc.getPointOnCircle(zodiac.radius.outer, house2Degree, -2);
     const house8Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house2Degree), -2);
     const house2house8Axis = this.s.line(house2Point.x, house2Point.y, house8Point.x, house8Point.y);
-    house2house8Axis.attr({
-      stroke: zodiac.stroke,
-      strokeWidth: 0.2
-    });
+    house2house8Axis.addClass("house-axis");
+    house2house8Axis.addClass("house-axis-2-8");
     axis.push(house2house8Axis);
 
     // 3 + 9
@@ -220,10 +204,8 @@ export class Drawer {
     const house3Point = Calc.getPointOnCircle(zodiac.radius.outer, house3Degree, -2);
     const house9Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house3Degree), -2);
     const house3house9Axis = this.s.line(house3Point.x, house3Point.y, house9Point.x, house9Point.y);
-    house3house9Axis.attr({
-      stroke: zodiac.stroke,
-      strokeWidth: 0.2
-    });
+    house3house9Axis.addClass("house-axis");
+    house3house9Axis.addClass("house-axis-3-9");
     axis.push(house3house9Axis);
 
     // 4 + 10
@@ -231,10 +213,8 @@ export class Drawer {
     const immumCoelliPoint = Calc.getPointOnCircle(zodiac.radius.outer, immumCoelliDegree, -2);
     const mediumCoelliPoint = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(immumCoelliDegree), -2);
     const immumMediumCoelliAxis = this.s.line(immumCoelliPoint.x, immumCoelliPoint.y, mediumCoelliPoint.x, mediumCoelliPoint.y);
-    immumMediumCoelliAxis.attr({
-      stroke: zodiac.stroke,
-      strokeWidth: 0.5
-    });
+    immumMediumCoelliAxis.addClass("house-axis");
+    immumMediumCoelliAxis.addClass("house-axis-immum-medium");
     axis.push(immumMediumCoelliAxis);
 
     // 5 + 11
@@ -242,10 +222,8 @@ export class Drawer {
     const house5Point = Calc.getPointOnCircle(zodiac.radius.outer, house5Degree, -2);
     const house11Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house5Degree), -2);
     const house5house11Axis = this.s.line(house5Point.x, house5Point.y, house11Point.x, house11Point.y);
-    house5house11Axis.attr({
-      stroke: zodiac.stroke,
-      strokeWidth: 0.2
-    });
+    house5house11Axis.addClass("house-axis");
+    house5house11Axis.addClass("house-axis-5-11");
     axis.push(house5house11Axis);
 
     // 6 + 12
@@ -253,10 +231,8 @@ export class Drawer {
     const house6Point = Calc.getPointOnCircle(zodiac.radius.outer, house6Degree, -2);
     const house12Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house6Degree), -2);
     const house6house12Axis = this.s.line(house6Point.x, house6Point.y, house12Point.x, house12Point.y);
-    house6house12Axis.attr({
-      stroke: zodiac.stroke,
-      strokeWidth: 0.2
-    });
+    house6house12Axis.addClass("house-axis");
+    house6house12Axis.addClass("house-axis-6-12");
     axis.push(house6house12Axis);
 
     return axis;
@@ -269,10 +245,7 @@ export class Drawer {
     const linePoint1 = Calc.getPointOnCircle(zodiac.radius.inner, degree);
     const linePoint2 = Calc.getPointOnCircle(zodiac.radius.inner, degree, 1);
     const planetAuxiliaryLine = this.s.line(linePoint1.x, linePoint1.y, linePoint2.x, linePoint2.y);
-    planetAuxiliaryLine.attr({
-      stroke: zodiac.stroke,
-      strokeWidth: 0.2
-    });
+    planetAuxiliaryLine.addClass("planet-auxiliary-line")
 
     const planetPosition = Calc.getPointOnCircle(zodiac.radius.inner, degree, 3);
     const planetImagePositionX = planetPosition.x - planetImageWidth / 2;
@@ -285,9 +258,7 @@ export class Drawer {
       planetSymbolBackgroundRadius = planetImageHeight / 2;
     }
     const planetSymbolBackground = this.s.circle(planetPosition.x, planetPosition.y, planetSymbolBackgroundRadius);
-    planetSymbolBackground.attr({
-      fill: "#F2F2F2"
-    });
+    planetSymbolBackground.addClass("planet-background");
 
     const planetSymbol = this.s.image(planet.imageUrl, planetImagePositionX, planetImagePositionY, planetImageWidth, planetImageHeight);
 

@@ -18,89 +18,76 @@ export class Zodiac {
       name: "Aries",
       symbol: "♈",
       imageUrl: this.svgImagePath + "aries.svg",
-      element: "fire",
-      fillColor: () => elements.fire.fillColor
+      element: "fire"
     }, {
       number: 2,
       name: "Taurus",
       symbol: "♉",
       imageUrl: this.svgImagePath + "taurus.svg",
-      element: "Earth",
-      fillColor: () => elements.earth.fillColor
+      element: "earth"
     }, {
       number: 3,
       name: "Gemini",
       symbol: "♊",
       imageUrl: this.svgImagePath + "gemini.svg",
-      element: "wind",
-      fillColor: () => elements.wind.fillColor
+      element: "wind"
     }, {
       number: 4,
       name: "Cancer",
       symbol: "♋",
       imageUrl: this.svgImagePath + "cancer.svg",
-      element: "water",
-      fillColor: () => elements.water.fillColor
+      element: "water"
     }, {
       number: 5,
       name: "Leo",
       symbol: "♌",
       imageUrl: this.svgImagePath + "leo.svg",
-      element: "fire",
-      fillColor: () => elements.fire.fillColor
+      element: "fire"
     }, {
       number: 6,
       name: "Virgo",
       symbol: "♍",
       imageUrl: this.svgImagePath + "virgo.svg",
-      element: "earth",
-      fillColor: () => elements.earth.fillColor
+      element: "earth"
     }, {
       number: 7,
       name: "Libra",
       symbol: "♎",
       imageUrl: this.svgImagePath + "libra.svg",
-      element: "wind",
-      fillColor: () => elements.wind.fillColor
+      element: "wind"
     }, {
       number: 8,
       name: "Scorpio",
       symbol: "♏",
       imageUrl: this.svgImagePath + "scorpio.svg",
-      element: "water",
-      fillColor: () => elements.water.fillColor
+      element: "water"
     }, {
       number: 9,
       name: "Sagittarius",
       symbol: "♐",
       imageUrl: this.svgImagePath + "sagittarius.svg",
-      element: "fire",
-      fillColor: () => elements.fire.fillColor
+      element: "fire"
     }, {
       number: 10,
       name: "Capricorn",
       symbol: "♑",
       imageUrl: this.svgImagePath + "capricorn.svg",
-      element: "earth",
-      fillColor: () => elements.earth.fillColor
+      element: "earth"
     }, {
       number: 11,
       name: "Aquarius",
       symbol: "♒",
       imageUrl: this.svgImagePath + "aquarius.svg",
-      element: "wind",
-      fillColor: () => elements.wind.fillColor
+      element: "wind"
     }, {
       number: 12,
       name: "Pisces",
       symbol: "♓",
       imageUrl: this.svgImagePath + "pisces.svg",
-      element: "water",
-      fillColor: () => elements.water.fillColor
+      element: "water"
     }];
 
     return {
-      stroke: "rgb(40, 40, 40)",
       radius: this.radius,
       signs: this.signs,
       getStartSignIndex: this.getStartSignIndex,
