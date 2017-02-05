@@ -181,61 +181,85 @@ export class Drawer {
   drawHousesAxes() {
     const axis = [];
 
-    // 1 + 7
+    const ascendantDescendantAxis = this.drawAscendantDescendantAxis();
+    axis.push(ascendantDescendantAxis);
+
+    const house2house8Axis = this.drawHouse2House8Axis();
+    axis.push(house2house8Axis);
+
+    const house3house9Axis = this.drawHouse3House9Axis();
+    axis.push(house3house9Axis);
+
+    const immumMediumCoelliAxis = this.drawImmumMediumCoelliAxis();
+    axis.push(immumMediumCoelliAxis);
+
+    const house5house11Axis = this.drawHouse5House11Axis();
+    axis.push(house5house11Axis);
+
+    const house6house12Axis = this.drawHouse6House12Axis();
+    axis.push(house6house12Axis);
+
+    return axis;
+  }
+
+  drawAscendantDescendantAxis() {
     const ascendantDegree = (this.houses.hasOwnProperty('house1') && this.houses.house1.hasOwnProperty('degree')) ? this.houses.house1.degree : null;
     const ascendantPoint = Calc.getPointOnCircle(zodiac.radius.outer, ascendantDegree, -2);
     const descendantPoint = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(ascendantDegree), -2);
     const ascendantDescendantAxis = this.s.line(ascendantPoint.x, ascendantPoint.y, descendantPoint.x, descendantPoint.y);
     ascendantDescendantAxis.addClass("house-axis");
     ascendantDescendantAxis.addClass("house-axis-ascendant-descendant");
-    axis.push(ascendantDescendantAxis);
+    return ascendantDescendantAxis;
+  }
 
-    // 2 + 8
+  drawHouse2House8Axis() {
     const house2Degree = (this.houses.hasOwnProperty('house2') && this.houses.house2.hasOwnProperty('degree')) ? this.houses.house2.degree : null;
     const house2Point = Calc.getPointOnCircle(zodiac.radius.outer, house2Degree, -2);
     const house8Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house2Degree), -2);
     const house2house8Axis = this.s.line(house2Point.x, house2Point.y, house8Point.x, house8Point.y);
     house2house8Axis.addClass("house-axis");
     house2house8Axis.addClass("house-axis-2-8");
-    axis.push(house2house8Axis);
+    return house2house8Axis;
+  }
 
-    // 3 + 9
+  drawHouse3House9Axis() {
     const house3Degree = (this.houses.hasOwnProperty('house3') && this.houses.house3.hasOwnProperty('degree')) ? this.houses.house3.degree : null;
     const house3Point = Calc.getPointOnCircle(zodiac.radius.outer, house3Degree, -2);
     const house9Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house3Degree), -2);
     const house3house9Axis = this.s.line(house3Point.x, house3Point.y, house9Point.x, house9Point.y);
     house3house9Axis.addClass("house-axis");
     house3house9Axis.addClass("house-axis-3-9");
-    axis.push(house3house9Axis);
+    return house3house9Axis;
+  }
 
-    // 4 + 10
+  drawImmumMediumCoelliAxis() {
     const immumCoelliDegree = (this.houses.hasOwnProperty('house4') && this.houses.house4.hasOwnProperty('degree')) ? this.houses.house4.degree : null;
     const immumCoelliPoint = Calc.getPointOnCircle(zodiac.radius.outer, immumCoelliDegree, -2);
     const mediumCoelliPoint = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(immumCoelliDegree), -2);
     const immumMediumCoelliAxis = this.s.line(immumCoelliPoint.x, immumCoelliPoint.y, mediumCoelliPoint.x, mediumCoelliPoint.y);
     immumMediumCoelliAxis.addClass("house-axis");
     immumMediumCoelliAxis.addClass("house-axis-immum-medium");
-    axis.push(immumMediumCoelliAxis);
+    return immumMediumCoelliAxis;
+  }
 
-    // 5 + 11
+  drawHouse5House11Axis() {
     const house5Degree = (this.houses.hasOwnProperty('house5') && this.houses.house5.hasOwnProperty('degree')) ? this.houses.house5.degree : null;
     const house5Point = Calc.getPointOnCircle(zodiac.radius.outer, house5Degree, -2);
     const house11Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house5Degree), -2);
     const house5house11Axis = this.s.line(house5Point.x, house5Point.y, house11Point.x, house11Point.y);
     house5house11Axis.addClass("house-axis");
     house5house11Axis.addClass("house-axis-5-11");
-    axis.push(house5house11Axis);
+    return house5house11Axis;
+  }
 
-    // 6 + 12
+  drawHouse6House12Axis() {
     const house6Degree = (this.houses.hasOwnProperty('house6') && this.houses.house6.hasOwnProperty('degree')) ? this.houses.house6.degree : null;
     const house6Point = Calc.getPointOnCircle(zodiac.radius.outer, house6Degree, -2);
     const house12Point = Calc.getPointOnCircle(zodiac.radius.outer, Calc.getOppositeDegree(house6Degree), -2);
     const house6house12Axis = this.s.line(house6Point.x, house6Point.y, house12Point.x, house12Point.y);
     house6house12Axis.addClass("house-axis");
     house6house12Axis.addClass("house-axis-6-12");
-    axis.push(house6house12Axis);
-
-    return axis;
+    return house6house12Axis;
   }
 
   drawPlanet(planet, degree) {
