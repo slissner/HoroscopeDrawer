@@ -2,6 +2,9 @@
 
 HoroscopeDrawer.js lets you draw zodiac charts in SVG-Format.
 
+![Horoscope Chart](preview.png "Horoscope Chart")
+
+
 ## Getting Started (Example)
 
 Draw a randomized horoscope:
@@ -40,7 +43,17 @@ gulp build
 
 Output will be placed in `/dist` folder.
 
-## Build with
+## Features
+
+* Zodiac 
+* Planets
+* Houses
+
+### Planned
+* Aspects (1.1.0)
+* Transits (1.2.0)
+
+## Built with
 
 * Browserify
 * Gulp
