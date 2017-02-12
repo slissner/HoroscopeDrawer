@@ -61,5 +61,5 @@ Output will be placed in `/dist` folder.
 
 ### License
 
-(c) [Samuel Lissner](http://www.slissner.de)
+(c) MIT, [Samuel Lissner](http://www.slissner.de), 2017
 
