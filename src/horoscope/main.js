@@ -24,19 +24,12 @@ export class Horoscope {
       "pluto",
       "mars"
     ];
-    this.validHousesProperties = [
-      "house1",
-      "house2",
-      "house3",
-      "house4",
-      "house5",
-      "house6",
-      "house7",
-      "house8",
-      "house9",
-      "house10",
-      "house11",
-      "house12"
+    this.validHousesAxesProperties = [
+      "axis2to8",
+      "axis3to9",
+      "axis4to10",
+      "axis5to11",
+      "axis6to12"
     ];
 
     if (properties) {
@@ -87,83 +80,30 @@ export class Horoscope {
   setDefaultProperties() {
     this._properties = {};
     this._properties.zodiac = {};
-    this._properties.zodiac.start = {
+    this._properties.zodiac.ascendant = {
       sign: Calc.getRandomInt(0, 11),
       degree: Calc.getRandomArbitrary(0, 30)
     }
     this._properties.planets = {};
-    this._properties.planets.sun = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
-    this._properties.planets.mercury = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
-    this._properties.planets.venus = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
-    this._properties.planets.mars = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
-    this._properties.planets.moon = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
-    this._properties.planets.jupiter = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
-    this._properties.planets.saturn = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
-    this._properties.planets.uranus = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
-    this._properties.planets.neptune = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
-    this._properties.planets.pluto = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
-    this._properties.planets.mars = {
-      degree: Calc.getRandomArbitrary(0, 360)
-    };
+    this._properties.planets.sun = Calc.getRandomArbitrary(0, 360);
+    this._properties.planets.mercury = Calc.getRandomArbitrary(0, 360);
+    this._properties.planets.venus = Calc.getRandomArbitrary(0, 360);
+    this._properties.planets.mars = Calc.getRandomArbitrary(0, 360);
+    this._properties.planets.moon = Calc.getRandomArbitrary(0, 360);
+    this._properties.planets.jupiter = Calc.getRandomArbitrary(0, 360);
+    this._properties.planets.saturn = Calc.getRandomArbitrary(0, 360);
+    this._properties.planets.uranus = Calc.getRandomArbitrary(0, 360);
+    this._properties.planets.neptune = Calc.getRandomArbitrary(0, 360);
+    this._properties.planets.pluto = Calc.getRandomArbitrary(0, 360);
 
-    this._properties.hasHouses = true;
     this._properties.houses = {};
-    this._properties.houses.house1 = {
-      degree: 0
-    };
-    this._properties.houses.house2 = {
-      degree: Calc.getRandomArbitrary(25, 40)
-    };
-    this._properties.houses.house3 = {
-      degree: Calc.getRandomArbitrary(50, 60)
-    };
-    this._properties.houses.house4 = {
-      degree: Calc.getRandomArbitrary(75, 85)
-    };
-    this._properties.houses.house5 = {
-      degree: Calc.getRandomArbitrary(110, 120)
-    };
-    this._properties.houses.house6 = {
-      degree: Calc.getRandomArbitrary(150, 160)
-    };
-    this._properties.houses.house7 = {
-      degree: Calc.getOppositeDegree(this._properties.houses.house1.degree)
-    };
-    this._properties.houses.house8 = {
-      degree: Calc.getOppositeDegree(this._properties.houses.house2.degree)
-    };
-    this._properties.houses.house9 = {
-      degree: Calc.getOppositeDegree(this._properties.houses.house3.degree)
-    };
-    this._properties.houses.house10 = {
-      degree: Calc.getOppositeDegree(this._properties.houses.house4.degree)
-    };
-    this._properties.houses.house11 = {
-      degree: Calc.getOppositeDegree(this._properties.houses.house5.degree)
-    };
-    this._properties.houses.house12 = {
-      degree: Calc.getOppositeDegree(this._properties.houses.house6.degree)
-    };
+    this._properties.houses.hasHouses = true;
+    this._properties.houses.axes = {};
+    this._properties.houses.axes.axis2to8 = Calc.getRandomArbitrary(25, 40);
+    this._properties.houses.axes.axis3to9 = Calc.getRandomArbitrary(50, 60);
+    this._properties.houses.axes.axis4to10 = Calc.getRandomArbitrary(75, 85);
+    this._properties.houses.axes.axis5to11 = Calc.getRandomArbitrary(110, 120);
+    this._properties.houses.axes.axis6to12 = Calc.getRandomArbitrary(150, 160);
   }
 
   /**
@@ -183,11 +123,11 @@ export class Horoscope {
     if (!properties.hasOwnProperty('zodiac')) {
       throw new Error("No 'zodiac' property set for horoscope.");
     }
-    if (!properties.zodiac.hasOwnProperty('start')) {
-      throw new Error("The 'zodiac' property requires 'start' property to be set.");
+    if (!properties.zodiac.hasOwnProperty('ascendant')) {
+      throw new Error("The 'zodiac' property requires 'ascendant' property to be set.");
     }
-    if (!properties.zodiac.start.hasOwnProperty('sign') || !properties.zodiac.start.hasOwnProperty('degree')) {
-      throw new Error("The 'zodiac.start' property requires 'sign' and 'degree' property to be set.");
+    if (!properties.zodiac.ascendant.hasOwnProperty('sign') || !properties.zodiac.ascendant.hasOwnProperty('degree')) {
+      throw new Error("The 'zodiac.ascendant' property requires 'sign' and 'degree' property to be set.");
     }
   }
 
@@ -207,9 +147,6 @@ export class Horoscope {
       if (!validPlanets.includes(elem)) {
         return true;
       }
-      if (!properties.planets[elem].hasOwnProperty('degree')) {
-        return true;
-      }
       return false;
     });
     if (invalidPlanets.length > 0) {
@@ -218,32 +155,32 @@ export class Horoscope {
   }
 
   validateHouses(properties) {
-    const validHouses = this.validHousesProperties;
+    const validHousesAxes = this.validHousesAxesProperties;
 
-    if (!properties.hasOwnProperty('hasHouses')) {
+    if (!properties.hasOwnProperty('houses')) {
+      throw new Error("The 'houses' is required.");
+    }
+    if (!properties.houses.hasOwnProperty('hasHouses')) {
       throw new Error("The 'houses' property requires 'hasHouses' property to be set.");
     }
-    if (typeof(properties.hasHouses) !== "boolean") {
+    if (typeof(properties.houses.hasHouses) !== "boolean") {
       throw new Error("The 'houses' property requires 'hasHouses' property to be of type boolean set.");
     }
-    if (properties.hasHouses) {
-      if (!properties.hasOwnProperty('houses')) {
-        throw new Error("No 'houses' property set for horoscope.");
+    if (properties.houses.hasHouses) {
+      if (!properties.houses.hasOwnProperty('axes')) {
+        throw new Error("No 'axes' property set for horoscope.");
       }
-      if (Object.keys(properties.houses).length != validHouses.length) {
-        throw new Error("A horoscope with 'houses' requires exactly 12 houses to be set.");
+      if (Object.keys(properties.houses.axes).length != validHousesAxes.length) {
+        throw new Error("A horoscope with 'houses' requires exactly " + validHousesAxes.length + " axes to be set.");
       }
-      const invalidHouses = Object.keys(properties.houses).filter(elem => {
-        if (!validHouses.includes(elem)) {
-          return true;
-        }
-        if (!properties.houses[elem].hasOwnProperty('degree')) {
+      const invalidHousesAxes = Object.keys(properties.houses.axes).filter(elem => {
+        if (!validHousesAxes.includes(elem)) {
           return true;
         }
         return false;
       });
-      if (invalidHouses.length > 0) {
-        throw new Error("The 'houses' property has invalid houses set.", invalidHouses);
+      if (invalidHousesAxes.length > 0) {
+        throw new Error("The 'houses' property has invalid axes set.", invalidHousesAxes);
       }
     }
   }
