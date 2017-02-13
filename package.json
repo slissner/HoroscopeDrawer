@@ -1,6 +1,6 @@
 {
-  "name": "HoroscopeDrawer",
-  "version": "1.0.0",
+  "name": "horoscope-drawer",
+  "version": "1.0.1",
   "description": "JavaScript-Library to draw astrological horoscope charts in SVG-Format.",
   "main": "src/horoscope/main.js",
   "scripts": {
