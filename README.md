@@ -68,6 +68,7 @@ Build the example page with:
 ```
 gulp example-build
 ```
+_note: You may need to manually create an empty `/dist` folder before running the build command._
 
 Outputs the source code files in the `/example` folder.
 

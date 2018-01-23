@@ -1,4 +1,7 @@
 dist/
 example/
+!src/example
 node_modules/
 *.iml
+.DS_Store
+src/DS_Store

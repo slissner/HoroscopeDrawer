@@ -1,0 +1,36 @@
+svg {
+  padding: 1em;
+  display: block;
+  margin: 0 auto;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+circle {
+  fill: transparent;
+}
+
+line {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 0.25px;
+}
+
+path {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 0.25px;
+}
+
+.zodiac-sign-element-wind {
+  fill: #fdc340;
+}
+.zodiac-sign-element-water {
+  fill: #708ef8;
+}
+.zodiac-sign-element-fire {
+  fill: #fc4d4d;
+}
+.zodiac-sign-element-earth {
+  fill: #53db42;
+}
