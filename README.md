@@ -1,3 +1,5 @@
+**This repository is not actively maintained.**
+
 # Horoscope Drawer
 
 HoroscopeDrawer.js lets you draw zodiac charts in SVG-Format.
